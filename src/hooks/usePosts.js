@@ -1,13 +1,12 @@
 import { useLocalStorage } from './useLocalStorage';
-import { Post, PostFormData } from '@/types/post';
 import { seedPosts } from '@/utils/seedData';
 import { toast } from '@/hooks/use-toast';
 
 export function usePosts() {
-  const [posts, setPosts] = useLocalStorage<Post[]>('posts', seedPosts);
+  const [posts, setPosts] = useLocalStorage('posts', seedPosts);
 
-  const createPost = (postData: PostFormData) => {
-    const newPost: Post = {
+  const createPost = (postData) => {
+    const newPost = {
       id: crypto.randomUUID(),
       title: postData.title,
       author: postData.author,
@@ -26,7 +25,7 @@ export function usePosts() {
     return newPost;
   };
 
-  const updatePost = (id: string, postData: PostFormData) => {
+  const updatePost = (id, postData) => {
     setPosts(currentPosts =>
       currentPosts.map(post =>
         post.id === id
@@ -48,7 +47,7 @@ export function usePosts() {
     });
   };
 
-  const deletePost = (id: string) => {
+  const deletePost = (id) => {
     setPosts(currentPosts => currentPosts.filter(post => post.id !== id));
     toast({
       title: "Success!",
@@ -56,11 +55,11 @@ export function usePosts() {
     });
   };
 
-  const getPost = (id: string): Post | undefined => {
+  const getPost = (id) => {
     return posts.find(post => post.id === id);
   };
 
-  const searchPosts = (query: string, author?: string): Post[] => {
+  const searchPosts = (query, author) => {
     return posts.filter(post => {
       const matchesQuery = query === '' || 
         post.title.toLowerCase().includes(query.toLowerCase()) ||

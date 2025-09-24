@@ -7,18 +7,10 @@ import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { PostFormData } from '@/types/post';
 
-interface PostFormProps {
-  initialData?: PostFormData;
-  onSubmit: (data: PostFormData) => void;
-  title: string;
-  submitLabel: string;
-}
-
-export function PostForm({ initialData, onSubmit, title, submitLabel }: PostFormProps) {
+export function PostForm({ initialData, onSubmit, title, submitLabel }) {
   const navigate = useNavigate();
-  const [formData, setFormData] = useState<PostFormData>(
+  const [formData, setFormData] = useState(
     initialData || {
       title: '',
       author: '',
@@ -27,10 +19,10 @@ export function PostForm({ initialData, onSubmit, title, submitLabel }: PostForm
     }
   );
   const [showPreview, setShowPreview] = useState(false);
-  const [errors, setErrors] = useState<Partial<PostFormData>>({});
+  const [errors, setErrors] = useState({});
 
-  const validateForm = (): boolean => {
-    const newErrors: Partial<PostFormData> = {};
+  const validateForm = () => {
+    const newErrors = {};
 
     if (!formData.title.trim()) {
       newErrors.title = 'Title is required';
@@ -54,7 +46,7 @@ export function PostForm({ initialData, onSubmit, title, submitLabel }: PostForm
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     
     if (!validateForm()) {
@@ -65,7 +57,7 @@ export function PostForm({ initialData, onSubmit, title, submitLabel }: PostForm
     navigate('/');
   };
 
-  const handleInputChange = (field: keyof PostFormData, value: string) => {
+  const handleInputChange = (field, value) => {
     setFormData(prev => ({ ...prev, [field]: value }));
     // Clear error when user starts typing
     if (errors[field]) {

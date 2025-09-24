@@ -1,6 +1,4 @@
-import { Post } from '@/types/post';
-
-export const seedPosts: Post[] = [
+export const seedPosts = [
   {
     id: '1',
     title: 'Getting Started with React Development',

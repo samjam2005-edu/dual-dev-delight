@@ -3,15 +3,9 @@ import { Calendar, User, Tag, Edit, Trash2 } from 'lucide-react';
 import { Card, CardHeader, CardContent, CardFooter } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Post } from '@/types/post';
 
-interface PostCardProps {
-  post: Post;
-  onDelete: (id: string) => void;
-}
-
-export function PostCard({ post, onDelete }: PostCardProps) {
-  const formatDate = (dateString: string) => {
+export function PostCard({ post, onDelete }) {
+  const formatDate = (dateString) => {
     return new Date(dateString).toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'short',

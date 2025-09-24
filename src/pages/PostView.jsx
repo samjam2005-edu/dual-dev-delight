@@ -19,7 +19,7 @@ import {
 import { useState } from 'react';
 
 export default function PostView() {
-  const { id } = useParams<{ id: string }>();
+  const { id } = useParams();
   const navigate = useNavigate();
   const { getPost, deletePost } = usePosts();
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
@@ -60,7 +60,7 @@ export default function PostView() {
     navigate('/');
   };
 
-  const formatDate = (dateString: string) => {
+  const formatDate = (dateString) => {
     return new Date(dateString).toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'long',

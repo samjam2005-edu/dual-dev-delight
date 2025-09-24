@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
 
 export default function EditPost() {
-  const { id } = useParams<{ id: string }>();
+  const { id } = useParams();
   const navigate = useNavigate();
   const { getPost, updatePost } = usePosts();
 
@@ -41,7 +41,7 @@ export default function EditPost() {
     );
   }
 
-  const handleSubmit = (formData: any) => {
+  const handleSubmit = (formData) => {
     updatePost(id, formData);
   };
 
